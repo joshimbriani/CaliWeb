@@ -7,6 +7,10 @@ var vacation = require('../models/vacation');
 var picture = mongoose.model('Picture');
 var Vacation = mongoose.model('Vacation');
 
+router.get('/photo', function(req, res) {
+	res.send('Here');
+});
+
 router.post('/photo', function(req, res) {
 	var theVacation = Vacation.findOne({user:req.user}).where('startDate').lt(Date.now()).where('endDate').gt(Date.now()).exec(function(err, vaca) {
 		if (typeof req.user !== 'undefined' && vaca) {

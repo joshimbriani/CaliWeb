@@ -6,14 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var api = require('./routes/api');
+var routes = require('./app/routes/index');
+var users = require('./app/routes/users');
+var api = require('./app/routes/api');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/app/views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -22,16 +22,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/front/public')));
 app.use(multer({dest: './uploads/'}));
 
 app.use('/', routes);
 app.use('/api/v1', api);
 app.use('/users', users);
 
-// what is a better way to do this?
 app.get('*', function(req, res) {
-  res.sendFile('index.html', {root: './public'});
+  //res.sendFile('index.html', {root: './front/public'});
+  res.redirect('/');
 });
 
 // catch 404 and forward to error handler
