@@ -29,6 +29,11 @@ app.use('/', routes);
 app.use('/api/v1', api);
 app.use('/users', users);
 
+// what is a better way to do this?
+app.get('*', function(req, res) {
+  res.sendFile('index.html', {root: './public'});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
