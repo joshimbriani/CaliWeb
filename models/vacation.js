@@ -8,3 +8,5 @@ var VacationSchema = new mongoose.Schema({
 	users: [mongoose.Schema.Types.ObjectID]    
 
 });
+
+mongoose.model('Vacation', VacationSchema);

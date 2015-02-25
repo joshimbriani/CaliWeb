@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var exif = require('exif').ExifImage;
 var mongoose = require('mongoose');
+var pictures = require('../models/picture');
+var vacation = require('../models/vacation');
 var picture = mongoose.model('Picture');
 var Vacation = mongoose.model('Vacation');
 
@@ -25,6 +27,7 @@ router.post('/photo', function(req, res) {
 			res.send(403);
 		}
 	});
+	
 });
 
 router.post('/vacation', function(req, res) {
