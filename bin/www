@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('CaliWeb:server');
 var http = require('http');
+var mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,17 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Opens the MongoDB instance
+ */
+
+mongoose.connect('mongodb://localhost/ProjectCali');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', function(callback) {
+  console.log('Connected to the Database');
+});
 
 /**
  * Listen on provided port, on all network interfaces.
