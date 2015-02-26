@@ -2,13 +2,41 @@ var express = require('express');
 var router = express.Router();
 var exif = require('exif').ExifImage;
 var mongoose = require('mongoose');
-var pictures = require('../models/picture');
+var picture = require('../models/picture');
 var vacation = require('../models/vacation');
-var picture = mongoose.model('Picture');
+var caption = require('../models/caption');
+var Picture = mongoose.model('Picture');
 var Vacation = mongoose.model('Vacation');
+var Caption = mongoose.model('Caption');
 
-router.get('/photo', function(req, res) {
-	res.send('Here');
+router.get('/vacation', function(req, res) {
+	res.send('Vacation API');
+	//Will return all vacations
+});
+
+router.post('/vacation', function(req, res) {
+	res.redirect('/');
+	//Create a new vacation
+});
+
+router.get('/vacation/:vacaid/caption', function(req, res) {
+	res.send('Vacation Caption API');
+	//Will return all captions for a vacation
+});
+
+router.post('/vacation/:vacaid/caption', function(req, res) {
+	res.redirect('/');
+	//Create a new caption for a specific vacation
+});
+
+router.get('/vacation/:vacaid/photo', function(req, res) {
+	res.send('Vacation Photo API');
+	//Will return all photos for a vacation
+});
+
+router.post('/vacation/:vacaid/photo', function(req, res) {
+	res.redirect('/');
+	//Create a new photo
 });
 
 router.post('/photo', function(req, res) {
