@@ -8,7 +8,7 @@
     <base href="/">
 
     <!-- Bootstrap -->
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,7 +18,7 @@
     <![endif]-->
   
   </head>
-  <body>
+  <body ng-controller="appController">
     
     <!-- navbar -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -61,21 +61,31 @@
     <!-- footer -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/javascripts/lib/jquery.min.js"></script>
+    <script src="/js/lib/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/javascripts/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
 
     <!-- angular and 3rd party libraries -->
 
-    <script src="/javascripts/lib/angular.min.js"></script>
-    <script src="/javascripts/lib/angular-resource.min.js"></script>
-    <script src="/javascripts/lib/angular-ui-router.min.js"></script>
+    <script src="/js/lib/angular.min.js"></script>
+    <script src="/js/lib/angular-resource.min.js"></script>
+    <script src="/js/lib/angular-ui-router.min.js"></script>
 
-    <!-- application submodules -->
+     <!-- application submodules -->
+
+    <script src="/js/app/users/users.module.js"></script>
+    <script src="/js/app/users/users.routes.js"></script>
 
     <!-- application module -->
     
-    <script src="/javascripts/app/app.module.js"></script>
+    <script src="/js/app/app.module.js"></script>
+    <script src="/js/app/users/User.factory.js"></script>
+    <script src="/js/app/users/login.controller.js"></script>
+    <script src="/js/app/users/signup.controller.js"></script>
+    <script src="/js/app/users/logout.controller.js"></script>
+    <script src="/js/app/home.controller.js"></script>
+    <script src="/js/app/app.controller.js"></script>
+    <script src="/js/app/app.routes.js"></script>
 
   </body>
 </html>
