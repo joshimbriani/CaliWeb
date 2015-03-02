@@ -4,7 +4,8 @@
 
   angular.module('caliweb', [
     'ngResource',
-    'ui.router'
+    'ui.router',
+    'caliweb.users'
   ]);
 
 })();
