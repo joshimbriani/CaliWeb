@@ -10,12 +10,16 @@ var Vacation = mongoose.model('Vacation');
 var Caption = mongoose.model('Caption');
 
 router.get('/vacation', function(req, res) {
-	res.send('Vacation API');
+	Vacation.find({private: false}, function(err, vacations) {
+		res.send(vacations);
+	}
+	//res.send('Vacation API');
 	//Will return all vacations
 });
 
 router.post('/vacation', function(req, res) {
-	res.redirect('/');
+	
+	res.end();
 	//Create a new vacation
 });
 
