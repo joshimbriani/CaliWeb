@@ -18,7 +18,8 @@ router.get('/vacation', function(req, res) {
 });
 
 router.post('/vacation', function(req, res) {
-	var myVaca = new Vacation(); 
+	var myVaca = new Vacation();
+	//myVaca. = 	
 	res.end();
 	//Create a new vacation
 });

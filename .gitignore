@@ -54,3 +54,5 @@ build/Release
 node_modules
 
 uploads
+
+db
