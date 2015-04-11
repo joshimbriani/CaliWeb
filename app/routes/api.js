@@ -19,12 +19,27 @@ router.get('/vacation', function(req, res) {
 
 router.post('/vacation', function(req, res) {
 	var myVaca = new Vacation();
-	//myVaca. = 	
-	res.end();
+	myVaca.title = req.body.name;
+	myVaca.titleSlug = slugify(req.body.name);
+	myVaca.startDate = new Date(req.body.startDate);
+	myVaca.endDate = new Date(req.body.endDate);
+	myVaca.description = req.body.description;
+	myVaca.save(function(err, savedVac) {
+		if (err) return handleError(err);
+		//res.redirect('/vacation/' + savedVac.id);
+		res.end();
+	});
 	//Create a new vacation
 });
 
+router.get('/vacation/:vacaid', function(req, res) {
+	Vacation.findById(req.params.vacaid, function(err, found) {
+		res.send(found);
+	});
+});
+
 router.get('/vacation/:vacaid/caption', function(req, res) {
+	
 	res.send('Vacation Caption API');
 	//Will return all captions for a vacation
 });
@@ -70,5 +85,14 @@ router.post('/photo', function(req, res) {
 router.post('/vacation', function(req, res) {
 	
 });
+
+function slugify(text) {
+	return text.toString().toLowerCase()
+	.replace(/\s+/g, '-')           // Replace spaces with -
+	.replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+	.replace(/\-\-+/g, '-')         // Replace multiple - with single -
+	.replace(/^-+/, '')             // Trim - from start of text
+	.replace(/-+$/, '');            // Trim - from end of text
+}
 
 module.exports = router;
