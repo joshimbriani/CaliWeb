@@ -8,6 +8,9 @@ var multer = require('multer');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
+var mongoose = require('mongoose');
+var user = require('./app/models/user');
+var User = mongoose.model('User');
 
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
@@ -71,6 +74,16 @@ app.post('/login',
 app.get('/logout', function(req, res) {
 	req.logout();
 	res.end();
+});
+
+app.post('/register', function(req, res) {
+	var newUser = new User();
+	newUser.email = req.body.email;
+	newUser.password = req.body.password;
+	newUser.save(function(err) {
+		if (err) handleError(err);
+		 res.end();
+	});
 });
 
 app.use('/', routes);
