@@ -7,10 +7,11 @@
 
 	HomeController.$inject = [
 		'$scope',
-		'$rootScope'
+		'$rootScope',
+		'$state'
 	];
 
-	function HomeController($scope, $rootScope) {
-
+	function HomeController($scope, $rootScope, $state) {
+		
 	}
 })();

@@ -21,6 +21,9 @@ Backend
 * New Caption API
 * New Vacation API
 * New Picture API
+* Fix duplicate user creation --
+ReferenceError: handleError is not defined
+    at Promise.<anonymous> (/Users/CCEW/Desktop/Jared/CaliWeb/app.js:84:12)
 
 Android
 -------

@@ -8,7 +8,7 @@
   	user.$inject = ['$resource'];
 
   	function user($resource) {
-		return $resource('/users/:id', {id: '@_id'});
+		return $resource('/register', {id: '@_id'});
 	}
 
 })();
