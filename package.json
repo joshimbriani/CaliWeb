@@ -16,6 +16,9 @@
     "passport": "~0.2.1",
     "multer": "~0.1.7",
     "exif": "~0.4.0",
-    "mongoose": "~3.8.23"
+    "mongoose": "~3.8.23",
+    "passport-local": "~1.0.0",
+    "express-session": "~1.11.1",
+    "bcrypt": "~0.8.2"
   }
 }

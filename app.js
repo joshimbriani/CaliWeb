@@ -5,12 +5,46 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 
 var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 var api = require('./app/routes/api');
 
 var app = express();
+
+//Auth setup
+passport.use(new LocalStrategy({
+		usernameField: 'email'
+	},
+	function(email, password,done) {
+		User.findOne({email: email}, function (err, user) {
+			if (err) {return done(err); }
+			if (!user) {
+				return done(null, false, {message : 'Incorrect username.' });
+			}
+			user.comparePassword(password, function(err, isMatch) {
+				if (err) return done(err);
+				if (isMatch) {
+					return done(null, user);
+				} else {
+					return done(null, false, {message: 'Invalid password' });
+				}
+			});
+	});
+}));
+
+passport.serializeUser(function(user,done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		done(err, user);
+	});
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, '/app/views'));
@@ -23,7 +57,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/front/public')));
+app.use(session({secret: 'this is a really good secret'}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(multer({dest: './uploads/'}));
+
+app.post('/login', 
+		passport.authenticate('local'),
+		function(req, res) {
+			res.end();
+		});
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.end();
+});
 
 app.use('/', routes);
 app.use('/api/v1', api);
