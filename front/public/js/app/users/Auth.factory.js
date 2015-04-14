@@ -8,22 +8,20 @@
 	AuthService.$inject = [
 		'$http',
 		'$window',
+		'$state',
 		'Session',
 		'User'
 	];
 
-	function AuthService($http, $window, Session, User) {
+	function AuthService($http, $window, $state, Session, User) {
 		var authService = {};
  
 	  	authService.login = function (credentials) {
-	  		console.log(credentials);
 		    return $http
 		      .post('/login', credentials)
 		      .then(function (res) {
-		      	console.log("attemp to create session");
-		      	console.log(res);
-		        Session.create(res.data.user.id);
-		        return res.data.user;
+		        Session.create(res.data);
+		        $state.go('home');
 		    });
 		};
 	 

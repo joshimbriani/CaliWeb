@@ -22,10 +22,6 @@
 			email: '',
 			password: ''
 		};
-
-		$scope.sayHello = function() {
-			console.log("hello");
-		}
 		
 		$scope.createUser = function() {
 			var user = {
@@ -33,12 +29,10 @@
 				email: $scope.email,
 				password: $scope.password
 			};
-			console.log("createUser called");
 			AuthService.createUser(user).then(
 				function(res) {
 					if (!res.err) {
 						AuthService.login(user);
-						console.log("attempt to login");
 					}
 					else $scope.message = "Email already in use.";
 				},

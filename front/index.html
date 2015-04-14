@@ -28,17 +28,24 @@
           <a class="navbar-brand" ui-sref="home">Caliweb</a>
         </div>
 
+        <div ng-show="isAuthenticated()">
+          <div class="collapse navbar-collapse">
+            <button type="button" class="btn btn-default btn-sm navbar-btn navbar-right">Logout</button>
+          </div>
+        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse">
-          <button type="button" ng-click="registerClicked()" class="btn btn-default btn-sm navbar-btn navbar-right">Register</button>
-          <form class="navbar-form navbar-right" role="form" ng-submit="login(credentials)" novalidate>
-            <div class="form-group">
-              <input type="text" class="form-control input-sm" placeholder="Email" ng-model="credentials.email">
-              <input type="password" class="form-control input-sm" placeholder="Password" ng-model="credentials.password">
-            </div>
-            <button type="submit" class="btn btn-default btn-sm">Login</button>
-          </form>
-        </div><!-- /.navbar-collapse -->
+        <div ng-show="!isAuthenticated()">
+          <div class="collapse navbar-collapse">
+            <button type="button" ng-click="registerClicked()" class="btn btn-default btn-sm navbar-btn navbar-right">Register</button>
+            <form class="navbar-form navbar-right" role="form" ng-submit="login(credentials)" novalidate>
+              <div class="form-group">
+                <input type="text" class="form-control input-sm" placeholder="Email" ng-model="credentials.email">
+                <input type="password" class="form-control input-sm" placeholder="Password" ng-model="credentials.password">
+              </div>
+              <button type="submit" class="btn btn-default btn-sm">Login</button>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div>
       </div><!-- /.container-fluid -->
     </nav>
 

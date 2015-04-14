@@ -8,10 +8,12 @@
 	HomeController.$inject = [
 		'$scope',
 		'$rootScope',
-		'$state'
+		'$state',
+		'AuthService',
+		'Session'
 	];
 
-	function HomeController($scope, $rootScope, $state) {
+	function HomeController($scope, $rootScope, $state, AuthService, Session) {
 		
 	}
 })();
