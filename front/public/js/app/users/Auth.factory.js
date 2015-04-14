@@ -21,7 +21,8 @@
 		      .post('/login', credentials)
 		      .then(function (res) {
 		      	console.log("attemp to create session");
-		        Session.create(res.data.id, res.data.user.id, res.data.user.role);
+		      	console.log(res);
+		        Session.create(res.data.user.id);
 		        return res.data.user;
 		    });
 		};
@@ -34,7 +35,7 @@
 	    	if (!angular.isArray(authorizedRoles)) {
 	      		authorizedRoles = [authorizedRoles];
 	    	}
-	    	return (authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
+	    	return (authService.isAuthenticated());
 	  	};
 
 	  	authService.createUser = function(user) {
