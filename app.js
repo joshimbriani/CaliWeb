@@ -20,9 +20,10 @@ var app = express();
 
 //Auth setup
 passport.use(new LocalStrategy({
-		usernameField: 'email'
-	},
-	function(email, password,done) {
+	    usernameField: 'email',
+	    passwordField: 'password'
+	  },
+	function(email, password, done) {
 		User.findOne({email: email}, function (err, user) {
 			if (err) {return done(err); }
 			if (!user) {
@@ -67,13 +68,14 @@ app.use(multer({dest: './uploads/'}));
 
 app.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
+		console.log(user, info);
 		if (err) { return next(err) }
 		if (!user) {
-			return res.redirect('/login');
+			return "There's no user";
 		}
 		req.logIn(user, function(err) {
 			if (err) { return next(err); }
-			return res.end();
+			return res.send(user._id);
 		});
 	})(req, res, next);
 });
@@ -85,11 +87,14 @@ app.get('/logout', function(req, res) {
 
 app.post('/register', function(req, res) {
 	var newUser = new User();
+	console.log(req.body);
 	newUser.email = req.body.email;
 	newUser.password = req.body.password;
+	newUser.username = req.body.username;
 	newUser.save(function(err) {
 		if (err) console.log(err);
-		 res.end();
+		console.log(newUser);
+		res.end();
 	});
 });
 
