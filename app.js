@@ -65,11 +65,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(multer({dest: './uploads/'}));
 
-app.post('/login', 
-		passport.authenticate('local'),
-		function(req, res) {
-			res.end();
+app.post('/login', function(req, res, next) {
+	passport.authenticate('local', function(err, user, info) {
+		if (err) { return next(err) }
+		if (!user) {
+			return res.redirect('/login');
+		}
+		req.logIn(user, function(err) {
+			if (err) { return next(err); }
+			return res.end();
 		});
+	})(req, res, next);
+});
 
 app.get('/logout', function(req, res) {
 	req.logout();
