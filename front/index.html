@@ -30,7 +30,7 @@
 
         <div ng-show="isAuthenticated()">
           <div class="collapse navbar-collapse">
-            <button type="button" class="btn btn-default btn-sm navbar-btn navbar-right">Logout</button>
+            <button type="button" ng-click="logoutClicked()" class="btn btn-default btn-sm navbar-btn navbar-right">Logout</button>
           </div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,7 +79,6 @@
     <script src="/js/app/users/USER_ROLES.constant.js"></script>
     <script src="/js/app/users/Session.service.js"></script>
     <script src="/js/app/users/Auth.factory.js"></script>
-    <script src="/js/app/users/login.controller.js"></script>
     <script src="/js/app/users/signup.controller.js"></script>
     <script src="/js/app/users/logout.controller.js"></script>
     <script src="/js/app/home.controller.js"></script>

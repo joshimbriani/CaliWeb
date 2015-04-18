@@ -8,12 +8,19 @@
 	LogoutController.$inject = [
 		'$scope',
 		'$rootScope',
-		'$window'
+		'$window',
+		'$state',
+		'AUTH_EVENTS',
+		'AuthService'
 	];
 
-	function LogoutController($scope, $rootScope, $window) {
+	function LogoutController($scope, $rootScope, $window, $state, AUTH_EVENTS, AuthService) {
 		$scope.logout = function() {
-
+			AuthService.logout();
+			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+			$state.go('home');
 		};
+
+		$scope.logout();
 	}
 })();

@@ -24,6 +24,11 @@
 		        $state.go('home');
 		    });
 		};
+
+		authService.logout = function() {
+			Session.destroy();
+			return this;
+		};
 	 
 	  	authService.isAuthenticated = function () {
 	    	return !!Session.userId;

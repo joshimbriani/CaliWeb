@@ -15,14 +15,6 @@
   function UsersRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
-      .state('login', {
-        url: '/login',
-        controller: 'loginController',
-        templateUrl: 'partials/users/login.html',
-        data: {
-          requireLogin: false
-        }
-      })
       .state('signup', {
         url: '/signup',
         controller: 'signupController',
