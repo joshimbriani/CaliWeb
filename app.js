@@ -71,7 +71,7 @@ app.post('/login', function(req, res, next) {
 		console.log(user, info);
 		if (err) { return next(err) }
 		if (!user) {
-			return "There's no user";
+			return res.sendStatus(401);
 		}
 		req.logIn(user, function(err) {
 			if (err) { return next(err); }
