@@ -29,9 +29,17 @@
         </div>
 
         <div ng-show="isAuthenticated()">
-          <div class="collapse navbar-collapse">
-            <button type="button" ng-click="logoutClicked()" class="btn btn-default btn-sm navbar-btn navbar-right">Logout</button>
-          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Account<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a ui-sref="vacations">My Vacations</a></li>
+                <li class="divider"></li>
+                <li><a ui-sref="logout">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div ng-show="!isAuthenticated()">
@@ -82,6 +90,9 @@
     <script src="/js/app/users/signup.controller.js"></script>
     <script src="/js/app/users/logout.controller.js"></script>
     <script src="/js/app/home.controller.js"></script>
+    <script src="/js/app/newVacationForm.controller.js"></script>
+    <script src="/js/app/vacationDetail.controller.js"></script>
+    <script src="/js/app/vacations.controller.js"></script>
     <script src="/js/app/app.controller.js"></script>
     <script src="/js/app/app.routes.js"></script>
 

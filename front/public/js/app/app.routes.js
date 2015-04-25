@@ -18,13 +18,37 @@
         controller: 'homeController',
         templateUrl: 'partials/home.html',
         data: {
-          requireLogin: true
+          requireLogin: false
         }
       })
       .state('home', {
         url: '/home',
         controller: 'homeController',
         templateUrl: 'partials/home.html',
+        data: {
+          requireLogin: false
+        }
+      })
+      .state('vacations', {
+        url: '/vacations',
+        controller: 'vacationsController',
+        templateUrl: 'partials/vacations.html',
+        data: {
+          requireLogin: true
+        }
+      })
+      .state('vacationDetail', {
+        url: '/vacationDetail',
+        controller: 'vacationDetailController',
+        templateUrl: 'partials/vacationDetail.html',
+        data: {
+          requireLogin: true
+        }
+      })
+      .state('newVacationForm', {
+        url: '/newVacationForm',
+        controller: 'newVacationFormController',
+        templateUrl: 'partials/newVacationForm.html',
         data: {
           requireLogin: true
         }

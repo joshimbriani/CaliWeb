@@ -22,8 +22,7 @@
 		$scope.isAuthenticated = AuthService.isAuthenticated;
 		$scope.registerClicked = registerClicked;
 		$scope.login = login;
-		$scope.logoutClicked = logoutClicked;
-		 
+
 		$scope.setCurrentUser = function (user) {
 			$scope.currentUser = user;
 		};
@@ -50,8 +49,5 @@
 			$state.go('signup');
 		};
 
-		function logoutClicked() {
-			$state.go('logout');
-		};
 	}
 })();
