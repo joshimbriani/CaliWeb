@@ -104,7 +104,8 @@ app.use('/users', users);
 
 app.get('*', function(req, res) {
   //res.sendFile('index.html', {root: './front/public'});
-  res.redirect('/');
+  //res.redirect('/');
+  res.sendFile(path.resolve(__dirname + '/front/index.html'));
 });
 
 // catch 404 and forward to error handler

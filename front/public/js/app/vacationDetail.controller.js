@@ -9,10 +9,11 @@
 		'$scope',
 		'$rootScope',
 		'$state',
+		'$stateParams',
 		'Vacation'
 	];
 
-	function VacationDetailController($scope, $rootScope, $state, Vacation) {
-		$scope.vacation = Vacation.get({id: $rootScope.vacationDetailId});
+	function VacationDetailController($scope, $rootScope, $state, $stateParams, Vacation) {
+		$scope.vacation = Vacation.get({id: $stateParams.id});
 	}
 })();

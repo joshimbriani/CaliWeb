@@ -29,7 +29,7 @@
 
 		function view(vacation) {
 			$rootScope.vacationDetailId = vacation._id;
-			$state.go('vacationDetail');
+			$state.go('vacationDetail', {id: vacation._id});
 		};
 
 		$scope.refresh();

@@ -8,7 +8,7 @@
   CaliRoutes.$inject = [
     '$stateProvider', 
     '$urlRouterProvider', 
-    '$locationProvider',
+    '$locationProvider'
   ];
 
   function CaliRoutes ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -38,7 +38,7 @@
         }
       })
       .state('vacationDetail', {
-        url: '/vacationDetail',
+        url: '/vacations/:id',
         controller: 'vacationDetailController',
         templateUrl: 'partials/vacationDetail.html',
         data: {
