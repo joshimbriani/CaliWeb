@@ -8,7 +8,7 @@
   	vacation.$inject = ['$resource'];
 
   	function vacation($resource) {
-		return $resource('/api/v1/vacation', {id: '@_id'});
+		return $resource('/api/v1/vacation/:id', {id: '@_id'});
 	}
 
 })();

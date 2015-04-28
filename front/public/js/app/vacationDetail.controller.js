@@ -13,6 +13,6 @@
 	];
 
 	function VacationDetailController($scope, $rootScope, $state, Vacation) {
-		//$scope.vacation = $rootScope.vacationDetailId);
+		$scope.vacation = Vacation.get({id: $rootScope.vacationDetailId});
 	}
 })();
