@@ -75,7 +75,7 @@ app.post('/login', function(req, res, next) {
 		}
 		req.logIn(user, function(err) {
 			if (err) { return next(err); }
-			return res.send(user._id);
+			return res.send(user);
 		});
 	})(req, res, next);
 });

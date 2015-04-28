@@ -9,18 +9,19 @@
 		'$http',
 		'$window',
 		'$state',
+		'$cookieStore',
 		'Session',
 		'User'
 	];
 
-	function AuthService($http, $window, $state, Session, User) {
+	function AuthService($http, $window, $state, $cookieStore, Session, User) {
 		var authService = {};
  
 	  	authService.login = function (credentials) {
 		    return $http
 		      .post('/login', credentials)
 		      .then(function (res) {
-		        Session.create(res.data);
+		        Session.create(res.data._id);
 		        $state.go('home');
 		    });
 		};
@@ -31,7 +32,10 @@
 		};
 	 
 	  	authService.isAuthenticated = function () {
-	    	return !!Session.userId;
+	  		if($cookieStore.get('loggedin') == 'true')
+	  			return true;
+	  		else	
+	  			return false;
 	  	};
 	 
 	  	authService.isAuthorized = function (authorizedRoles) {

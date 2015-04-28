@@ -44,6 +44,12 @@ router.get('/vacation/:vacaid', function(req, res) {
 	});
 });
 
+router.delete('/vacation/:vacaid', function(req,res) {
+	Vacation.remove({_id: req.params.vacaid}, function(err) {
+		if(!err) res.end();
+	});
+});
+
 router.get('/vacation/:vacaid/caption', function(req, res) {
 	
 	res.send('Vacation Caption API');
