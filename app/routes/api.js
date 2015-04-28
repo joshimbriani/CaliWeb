@@ -62,13 +62,32 @@ router.post('/vacation/:vacaid/caption', function(req, res) {
 });
 
 router.get('/vacation/:vacaid/photo', function(req, res) {
-	res.send('Vacation Photo API');
+	Picture.find({vacation: req.params.vacaid}, function(err, foundPictures) {
+		if (!err) res.send(foundPictures);
+	});
 	//Will return all photos for a vacation
 });
 
 router.post('/vacation/:vacaid/photo', function(req, res) {
 	res.redirect('/');
 	//Create a new photo
+});
+
+router.put('/photo/:photoid', function(req, res) {
+	Picture.findById(req.params.photoid, function(err, picture) {
+		picture.caption = req.body.caption;
+		picture.save(function(err) {
+			if (err) throw err;
+			res.send(picture);
+		});
+	});
+});
+
+router.delete('/photo/:photoid', function(req, res) {
+	Picture.remove({_id: req.params.photoid}, function(err) {
+		if (err) throw err;
+		res.end();
+	});
 });
 
 router.post('/photo', function(req, res) {
@@ -80,15 +99,27 @@ router.post('/photo', function(req, res) {
 						console.log('Error: ' + error.message);
 					} else {
 						console.log(exifData);
-						
+						Picture newPic = new Picture();
+						newPic.path = req.files.fileupload.path;
+						newPic.user = req.user;
+						newPic.vacation = vaca;
+						if (exifData.exif.CreateDate != '') {
+							newPic.date = new Date(exifData.exif.CreateDate);
+						} else {
+							newPic.date = Date.now();
+						}
+						newPic.save(function(err) {
+							if (err) throw err;
+							res.sendStatus(200);
+						}
 					}
 				});
 			} catch (error) {
 				console.log('Error: ' + error.message);
 			}
-			res.send(200);
+			//res.sendStatus(200);
 		} else {	
-			res.send(403);
+			res.sendStatus(403);
 		}
 	});
 	
