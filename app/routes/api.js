@@ -24,6 +24,12 @@ router.post('/vacation', function(req, res) {
 	myVaca.startDate = new Date(req.body.startDate);
 	myVaca.endDate = new Date(req.body.endDate);
 	myVaca.description = req.body.description;
+	if(req.body.privacy) {
+		myVaca.private = req.body.privacy;
+	}
+	else {
+		myVaca.private = false;
+	}
 	myVaca.save(function(err, savedVac) {
 		if (err) return handleError(err);
 		//res.redirect('/vacation/' + savedVac.id);

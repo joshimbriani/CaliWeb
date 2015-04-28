@@ -7,10 +7,12 @@
 
 	VacationDetailController.$inject = [
 		'$scope',
-		'$rootScope'
+		'$rootScope',
+		'$state',
+		'Vacation'
 	];
 
-	function VacationDetailController($scope, $rootScope) {
-
+	function VacationDetailController($scope, $rootScope, $state, Vacation) {
+		//$scope.vacation = $rootScope.vacationDetailId);
 	}
 })();

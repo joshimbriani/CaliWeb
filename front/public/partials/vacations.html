@@ -1,2 +1,23 @@
 <h3>My Vacations</h3>
 <a ui-sref="newVacationForm">Create a new vacation?</a>
+
+<table class="table table-condensed table-striped table-hover">
+	<thead>
+		<th style="width:15%">Vacation</th>
+		<th style="width:60%">Description</th>
+		<th style="width:10%">Start Date</th>
+		<th style="width:10%">End Date</th>
+		<th style="width:5%"></th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="vacation in vacations | orderBy:'endDate':'true'">
+			<td style="width:15%">
+				<span style="cursor:pointer" ng-click="view(vacation)"><strong>{{vacation.title}}</strong></span>
+			</td>
+			<td style="width:60%">{{vacation.description}}</td>
+			<td style="width:10%">{{vacation.startDate | date:'shortDate'}}</td>
+			<td style="width:10%">{{vacation.endDate | date:'shortDate'}}</td>
+			<td style="width:5%"><button class='btn btn-xs btn-danger' ng-click="remove(vacation)">X</button></td>
+		</tr>
+	</tbody>
+</table>

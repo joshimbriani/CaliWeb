@@ -8,15 +8,17 @@
 	NewVacationFormController.$inject = [
 		'$scope',
 		'$rootScope',
-		'$state'
+		'$state',
+		'Vacation'
 	];
 
-	function NewVacationFormController($scope, $rootScope, $state) {
+	function NewVacationFormController($scope, $rootScope, $state, Vacation) {
 		$scope.createVacation = createVacation;
 
 		function createVacation (vacation) {
-			console.log(vacation);
-			$state.go("vacations");
+			Vacation.save(null, vacation, function() {
+				$state.go("vacations");
+			});
 		};
 	}
 })();
