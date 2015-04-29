@@ -24,11 +24,8 @@
 		$scope.newVacationClicked = newVacationClicked;
 
 		function refresh() {
-			//$scope.vacations = Vacation.query();
-			console.log("refresh: " + $cookieStore.get('userId'));
 			$http.get('/api/v1/vacation/byuser/' + $cookieStore.get('userId')).then(
 				function(response) {
-					console.log(response);
 					$scope.vacations = response.data;
 				}, function(error) {
 					console.log(error);

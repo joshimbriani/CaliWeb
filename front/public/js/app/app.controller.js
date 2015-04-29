@@ -36,7 +36,6 @@
 		    AuthService.login(credentials).then(function (user) {
 		      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 		      $scope.setCurrentUser(user);
-		      console.log($scope.currentUser);
 		      $scope.credentials = {
 		      	email: '', 
 		      	password: ''

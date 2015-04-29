@@ -41,7 +41,7 @@ router.post('/vacation', function(req, res) {
 });
 
 router.get('/vacation/byuser/:userid', function(req, res) {
-	Vacation.find({users: req.params.userid}, function(err, vacas) {
+	Vacation.find({users: mongoose.Types.ObjectId(req.params.userid)}, function(err, vacas) {
 		res.send(vacas);
 	});
 });
