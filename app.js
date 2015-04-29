@@ -61,10 +61,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/front/public')));
+app.use(express.static(path.join(__dirname, '/uploads')));
 app.use(session({secret: 'this is a really good secret'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(multer({dest: './uploads/'}));
+app.use(multer({dest: './uploads/',
+	onFileUploadStart: function(file) {
+		console.log(file.originalname + 'is starting...');
+	},
+	onFileUploadComplete: function(file) {
+		console.log(file.originalname + ' ended...');
+	}
+}));
 
 app.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {

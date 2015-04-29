@@ -10,7 +10,8 @@ var VacationSchema = new mongoose.Schema({
 	startDate: Date,
 	endDate: Date,
 	private: Boolean,
-	users: [mongoose.Schema.Types.ObjectID]    
+	users: [mongoose.Schema.Types.ObjectID],
+	pictures: [mongoose.Schema.Types.ObjectID] 
 
 });
 

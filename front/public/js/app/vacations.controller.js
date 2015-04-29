@@ -18,6 +18,7 @@
 		$scope.refresh = refresh;
 		$scope.remove = remove;
 		$scope.view = view;
+		$scope.newVacationClicked = newVacationClicked;
 
 		function refresh() {
 			$scope.vacations = Vacation.query();
@@ -28,8 +29,11 @@
 		};
 
 		function view(vacation) {
-			$rootScope.vacationDetailId = vacation._id;
 			$state.go('vacationDetail', {id: vacation._id});
+		};
+
+		function newVacationClicked() {
+			$state.go('newVacationForm');
 		};
 
 		$scope.refresh();

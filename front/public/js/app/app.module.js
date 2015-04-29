@@ -5,6 +5,7 @@
     'ngResource',
     'ui.router',
     'ngCookies',
+    'angularFileUpload',
     'caliweb.users'
   ]);
 

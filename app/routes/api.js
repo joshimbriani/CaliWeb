@@ -24,6 +24,8 @@ router.post('/vacation', function(req, res) {
 	myVaca.startDate = new Date(req.body.startDate);
 	myVaca.endDate = new Date(req.body.endDate);
 	myVaca.description = req.body.description;
+	myVaca.users = [req.user._id];
+	myVaca.pictures = [];
 	if(req.body.privacy) {
 		myVaca.private = req.body.privacy;
 	}
@@ -91,14 +93,14 @@ router.delete('/photo/:photoid', function(req, res) {
 });
 
 router.post('/photo', function(req, res) {
-	var theVacation = Vacation.findOne({user:req.user}).where('startDate').lt(Date.now()).where('endDate').gt(Date.now()).exec(function(err, vaca) {
+	Vacation.findOne({users:req.user._id}).where('startDate').lt(Date.now()).where('endDate').gt(Date.now()).exec(function(err, vaca) {
+		if (err) throw err;
 		if (typeof req.user !== 'undefined' && vaca) {
 			try {
 				new exif({image:req.files.fileupload.path}, function(error, exifData) {
 					if (error) {
 						console.log('Error: ' + error.message);
 					} else {
-						console.log(exifData);
 						var newPic = new Picture();
 						newPic.path = req.files.fileupload.path;
 						newPic.user = req.user;
@@ -108,9 +110,14 @@ router.post('/photo', function(req, res) {
 						} else {
 							newPic.date = Date.now();
 						}
-						newPic.save(function(err) {
+						newPic.save(function(err, savedPic) {
 							if (err) throw err;
-							res.sendStatus(200);
+							vaca.pictures.push(savedPic._id);
+							vaca.save(function(err) {
+								if (err) throw err;
+								res.sendStatus(200);
+							});
+							//res.sendStatus(200);
 						});
 					}
 				});
