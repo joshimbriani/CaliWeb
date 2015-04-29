@@ -33,6 +33,13 @@ Refresh always goes to index from any page. Refreshing also LOGS YOU OUT. After 
 
 *****************************************************************************************************************
 
+*Logout on logout click
+*Front PAge - Public Vacations
+*Hide Caption Edit if not your vacation
+*Incorrect password error message
+
+*Android App
+
 Android
 -------
 * Boilerplate
