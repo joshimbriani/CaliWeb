@@ -99,7 +99,7 @@ router.post('/photo', function(req, res) {
 						console.log('Error: ' + error.message);
 					} else {
 						console.log(exifData);
-						Picture newPic = new Picture();
+						var newPic = new Picture();
 						newPic.path = req.files.fileupload.path;
 						newPic.user = req.user;
 						newPic.vacation = vaca;
@@ -111,7 +111,7 @@ router.post('/photo', function(req, res) {
 						newPic.save(function(err) {
 							if (err) throw err;
 							res.sendStatus(200);
-						}
+						});
 					}
 				});
 			} catch (error) {
