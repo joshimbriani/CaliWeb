@@ -1,6 +1,20 @@
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<h3>Public Vacations</h3>
+
+<table class="table table-condensed table-striped table-hover">
+	<thead>
+		<th style="width:20%">Vacation</th>
+		<th style="width:60%">Description</th>
+		<th style="width:10%">Start Date</th>
+		<th style="width:10%">End Date</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="vacation in publicVacations | orderBy:'endDate':'true'">
+			<td style="width:20%">
+				{{vacation.title}}
+			</td>
+			<td style="width:60%">{{vacation.description}}</td>
+			<td style="width:10%">{{vacation.startDate | date:'shortDate'}}</td>
+			<td style="width:10%">{{vacation.endDate | date:'shortDate'}}</td>
+		</tr>
+	</tbody>
+</table>

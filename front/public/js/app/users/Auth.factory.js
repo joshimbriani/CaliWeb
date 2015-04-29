@@ -22,7 +22,7 @@
 		      .post('/login', credentials)
 		      .then(function (res) {
 		        Session.create(res.data._id);
-		        $state.go('home');
+		        return res.data;
 		    });
 		};
 

@@ -10,10 +10,19 @@
 		'$rootScope',
 		'$state',
 		'AuthService',
-		'Session'
+		'Session',
+		'Vacation'
 	];
 
-	function HomeController($scope, $rootScope, $state, AuthService, Session) {
-		
+	function HomeController($scope, $rootScope, $state, AuthService, Session, Vacation) {
+		$scope.publicVacations = [];
+
+		$scope.refresh = refresh;
+
+		function refresh() {
+			$scope.publicVacations = Vacation.query();
+		};
+
+		$scope.refresh();
 	}
 })();

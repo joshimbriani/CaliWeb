@@ -9,10 +9,13 @@
 		'$scope',
 		'$rootScope',
 		'$state',
-		'Vacation'
+		'$http',
+		'$cookieStore',
+		'Vacation',
+		'Session'
 	];
 
-	function VacationsController($scope, $rootScope, $state, Vacation) {
+	function VacationsController($scope, $rootScope, $state, $http, $cookieStore, Vacation, Session) {
 		$scope.vacations = [];
 
 		$scope.refresh = refresh;
@@ -21,7 +24,15 @@
 		$scope.newVacationClicked = newVacationClicked;
 
 		function refresh() {
-			$scope.vacations = Vacation.query();
+			//$scope.vacations = Vacation.query();
+			console.log("refresh: " + $cookieStore.get('userId'));
+			$http.get('/api/v1/vacation/byuser/' + $cookieStore.get('userId')).then(
+				function(response) {
+					console.log(response);
+					$scope.vacations = response.data;
+				}, function(error) {
+					console.log(error);
+			});
 		};
 
 		function remove(vacation) {

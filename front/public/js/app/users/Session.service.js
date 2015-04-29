@@ -15,11 +15,13 @@
 		this.create = function (userId) {
 		    this.userId = userId;
 		    $cookieStore.put('loggedin', 'true');
+		    $cookieStore.put('userId', userId);
 		};
 
 		this.destroy = function () {
 		    this.userId = null;
 		    $cookieStore.put('loggedin', 'false');
+		    $cookieStore.put('userId', '');
 		};
 	}
 })();

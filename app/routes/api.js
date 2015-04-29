@@ -138,9 +138,9 @@ router.post('/photo', function(req, res) {
 	
 });
 
-router.post('/vacation', function(req, res) {
+/*router.post('/vacation', function(req, res) {
 	
-});
+});*/
 
 function slugify(text) {
 	return text.toString().toLowerCase()
