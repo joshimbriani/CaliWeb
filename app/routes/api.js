@@ -40,6 +40,12 @@ router.post('/vacation', function(req, res) {
 	//Create a new vacation
 });
 
+router.get('/vacation/byuser/:userid', function(req, res) {
+	Vacation.find({users: req.params.userid}, function(err, vacas) {
+		res.send(vacas);
+	});
+});
+
 router.get('/vacation/:vacaid', function(req, res) {
 	Vacation.findById(req.params.vacaid, function(err, found) {
 		res.send(found);
