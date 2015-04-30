@@ -11,7 +11,8 @@
 
 <div class="row" style="margin-top:3em;" ng-repeat="rows in chunkedData">
 	<div class="col-md-4 text-center" ng-repeat="picture in rows">
-		<img ng-src="{{filePath(picture.path)}}" ng-click="setTempPicture(picture)" data-toggle="modal" data-target="#captionDetailModal" data-backdrop="static" />
+		<img ng-if="creator" ng-src="{{filePath(picture.path)}}" ng-click="setTempPicture(picture)" data-toggle="modal" data-target="#captionDetailModal" data-backdrop="static" />
+    <img ng-if="!creator" ng-src="{{filePath(picture.path)}}" />
 		<p>{{picture.caption}}</p>
 	</div>
 </div>

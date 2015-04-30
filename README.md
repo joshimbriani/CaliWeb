@@ -38,6 +38,5 @@ Web Frontend
 ------------
 
 *Authenticate states
-*Hide Caption Edit if not your vacation
 *Incorrect password error message
 

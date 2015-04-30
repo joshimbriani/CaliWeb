@@ -69,7 +69,7 @@
 			$scope.tempPicture.caption = "";
 			$scope.tempPicture._id = 0;
 
-			$scope.creator = ($cookieStore.get('userId') === $scope.vacation.users);
+			$scope.creator = ($cookieStore.get('userId') == $scope.vacation.users);
 
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
