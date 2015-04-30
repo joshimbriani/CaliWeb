@@ -11,11 +11,10 @@
 		'$state',
 		'$http',
 		'$cookieStore',
-		'Vacation',
-		'Session'
+		'Vacation'
 	];
 
-	function VacationsController($scope, $rootScope, $state, $http, $cookieStore, Vacation, Session) {
+	function VacationsController($scope, $rootScope, $state, $http, $cookieStore, Vacation) {
 		$scope.vacations = [];
 
 		$scope.refresh = refresh;

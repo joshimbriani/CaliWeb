@@ -2,7 +2,7 @@
 <p>{{vacation.description}}</p>
 <hr>
 
-<div ng-file-drop ng-file-select ng-model="pictureUploads" ng-change="upload(pictureUploads)" class="jumbotron text-center" drag-over-class="dragover" ng-multiple="true" allow-dir="true" ng-accept="'.jpg,.jpeg'">
+<div ng-if="creator" ng-file-drop ng-file-select ng-model="pictureUploads" ng-change="upload(pictureUploads)" class="jumbotron text-center" drag-over-class="dragover" ng-multiple="true" allow-dir="true" ng-accept="'.jpg,.jpeg'">
     <span>
     	Drop pictures here or click to upload
     </span>
@@ -11,11 +11,7 @@
 
 <div class="row" style="margin-top:3em;" ng-repeat="rows in chunkedData">
 	<div class="col-md-4 text-center" ng-repeat="picture in rows">
-		<img ng-src="{{filePath(picture.path)}}" ng-click="setTempId(picture._id)" data-toggle="modal" data-target="#captionDetailModal" />
-		<!--<form ng-submit="captionSubmitted(picture.caption, picture._id)">
-			<textarea rows="2" ng-model="picture.caption" class="form-control" style="margin-top:1em;width:100%;resize:none;overflow:scroll"></textarea>
-			<button class="btn btn-info" type="submit">Save</button>
-		</form>-->
+		<img ng-src="{{filePath(picture.path)}}" ng-click="setTempPicture(picture)" data-toggle="modal" data-target="#captionDetailModal" data-backdrop="static" />
 		<p>{{picture.caption}}</p>
 	</div>
 </div>
@@ -25,17 +21,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Picture Details</h4>
+        <span class="pull-right"><button type="button" class="btn btn-xs btn-danger" ng-click="dismissModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>
+        <h4 class="modal-title" id="myModalLabel">Edit Caption</h4>
       </div>
       <div class="modal-body">
-        <form ng-submit='captionSubmitted(picture.caption)'>
+        <form ng-submit='captionSubmitted(tempPicture.caption)'>
 		  <div class="form-group">
 		    <label>Caption</label>
-		    <textarea rows="2" ng-model="picture.caption" class="form-control" style="resize:none;overflow:scroll"></textarea>
+		    <textarea rows="2" ng-model="tempPicture.caption" class="form-control" style="resize:none;overflow:scroll"></textarea>
 		  </div>
 		  <button type="submit" class="btn btn-primary">Save</button>
-		  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      <button type="button" class="btn btn-danger" ng-click="dismissModal()">Cancel</button>
 		</form>
       </div>
       <div class="modal-footer">

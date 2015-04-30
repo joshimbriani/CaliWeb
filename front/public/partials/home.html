@@ -10,7 +10,9 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="vacation in publicVacations | orderBy:'endDate':'true'">
-			<td style="width:15%">{{vacation.title}}</td>
+			<td style="width:15%">
+				<span style="cursor:pointer" ng-click="view(vacation)"><strong>{{vacation.title}}</strong></span>
+			</td>
 			<td style="width:10%">{{vacation.users}}</td>
 			<td style="width:55%">{{vacation.description}}</td>
 			<td style="width:10%">{{vacation.startDate | date:'shortDate'}}</td>

@@ -11,21 +11,25 @@
 		'$state',
 		'$stateParams',
 		'$http',
+		'$cookieStore',
 		'Vacation',
 		'Photo'
 	];
 
-	function VacationDetailController($scope, $rootScope, $state, $stateParams, $http, Vacation, Photo) {
+	function VacationDetailController($scope, $rootScope, $state, $stateParams, $http, $cookieStore, Vacation, Photo) {
 		$scope.pictures = [];
 		$scope.files = [];
 		$scope.chunkedData = [];
+		$scope.creator = false;
+		$scope.tempPicture = {};
 
 		$scope.refresh = refresh;
 		$scope.upload = upload;
 		$scope.filePath = filePath;
 		$scope.chunk = chunk;
-		$scope.setTempId = setTempId;
+		$scope.setTempPicture = setTempPicture;
 		$scope.captionSubmitted = captionSubmitted;
+		$scope.dismissModal = dismissModal;
 
 		$scope.vacation = Vacation.get({id: $stateParams.id}, $scope.refresh);
 
@@ -62,7 +66,11 @@
     	};
 
 		function refresh() {
-			$scope.tempId = "";
+			$scope.tempPicture.caption = "";
+			$scope.tempPicture._id = 0;
+
+			$scope.creator = ($cookieStore.get('userId') === $scope.vacation.users);
+
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
 					$scope.pictures = response;
@@ -80,13 +88,19 @@
 			return newArr;
 		};
 
-		function setTempId(pictureId) {
-			$scope.tempId = pictureId;
+		function setTempPicture(picture) {
+			$scope.tempPicture.caption = picture.caption;
+			$scope.tempPicture._id = picture._id;
 		};
 
-		function captionSubmitted(caption) {
+		function captionSubmitted(editedCaption) {
 			$('#captionDetailModal').modal('hide');
-			Photo.update({id: $scope.tempId}, {caption: caption}, $scope.refresh);
+			Photo.update({id: $scope.tempPicture._id}, {caption: editedCaption}, $scope.refresh);
+		};
+
+		function dismissModal() {
+			$('#captionDetailModal').modal('hide');
+			$scope.refresh();
 		};
 	}
 })();
