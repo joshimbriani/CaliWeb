@@ -42,6 +42,29 @@ router.post('/vacation', function(req, res) {
 	//Create a new vacation
 });
 
+router.post('/vacationphone', function(req, res) {
+	User.find({}, function(err, users) {
+		if (err) throw err;
+		var myVaca = new Vacation();
+		myVaca.title = req.body.name;
+		myVaca.titleSlug = slugify(req.body.name);
+		myVaca.startDate = new Date(req.body.startDate);
+	        myVaca.endDate = new Date(req.body.endDate);
+		myVaca.description = req.body.description;
+		myVaca.pictures = [users[0]._id];
+		myVaca.pictures = [];
+		if(req.body.privacy) {
+			myVaca.private = req.body.privacy;
+		} else {
+			myVaca.private = false;
+							        }
+	        myVaca.save(function(err, savedVac) {
+			if (err) return handleError(err);
+			res.end();
+		});
+	});
+});
+
 router.get('/vacation/byuser/:userid', function(req, res) {
 	Vacation.find({users: mongoose.Types.ObjectId(req.params.userid)}, function(err, vacas) {
 		res.send(vacas);
