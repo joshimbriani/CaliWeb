@@ -75,14 +75,13 @@
     	};
 
 		function refresh() {
-			$scope.tempPicture.caption = "";
-			$scope.tempPicture._id = 0;
-
 			$scope.creator = ($cookieStore.get('userId') == $scope.vacation.users);
 
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
 					if($scope.pictureLength != response.data.length) {
+						$scope.tempPicture.caption = "";
+						$scope.tempPicture._id = 0;
 						$scope.pictures = response;
 						$scope.pictureLength = $scope.pictures.data.length;
 						$scope.chunkedData = chunk($scope.pictures.data, 3);
@@ -111,13 +110,12 @@
 		};
 
 		function captionRefresh() {
-			$scope.tempPicture.caption = "";
-			$scope.tempPicture._id = 0;
-
 			$scope.creator = ($cookieStore.get('userId') == $scope.vacation.users);
 
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
+					$scope.tempPicture.caption = "";
+					$scope.tempPicture._id = 0;
 					$scope.pictures = response;
 					$scope.pictureLength = $scope.pictures.data.length;
 					$scope.chunkedData = chunk($scope.pictures.data, 3);
