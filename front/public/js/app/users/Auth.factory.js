@@ -27,8 +27,14 @@
 		};
 
 		authService.logout = function() {
-			Session.destroy();
-			return this;
+			return $http.get('/logout').then(
+				function(response) {
+					Session.destroy();
+					return this;
+				},
+				function(error) {
+					console.log(error);
+				});
 		};
 	 
 	  	authService.isAuthenticated = function () {
