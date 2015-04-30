@@ -23,6 +23,7 @@
 		$scope.chunkedData = [];
 		$scope.creator = false;
 		$scope.tempPicture = {};
+		$scope.pictureLength = $scope.pictures.length;
 
 		$scope.refresh = refresh;
 		$scope.upload = upload;
@@ -34,7 +35,7 @@
 
 		$scope.vacation = Vacation.get({id: $stateParams.id}, $scope.refresh);
 
-		$interval($scope.refresh, 1000);
+		$interval($scope.refresh, 5000);
 
 		$('#captionDetailModal').on('shown.bs.modal', function() {
 	        $('input:text:visible:first').focus();
@@ -76,8 +77,11 @@
 
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
-					$scope.pictures = response;
-					$scope.chunkedData = chunk($scope.pictures.data, 3);
+					if($scope.pictureLength != response.length) {
+						$scope.pictures = response;
+						$scope.pictureLength = $scope.pictures.length;
+						$scope.chunkedData = chunk($scope.pictures.data, 3);
+					}
 				}, function(error) {
 					console.log(error);
 				});
