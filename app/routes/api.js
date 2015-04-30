@@ -84,7 +84,7 @@ router.post('/vacation/:vacaid/photo', function(req, res) {
 });
 
 router.get('/user/:userid', function(req, res) {
-	User.getById(req.param.userid, function(err, user) {
+	User.findById(req.params.userid, function(err, user) {
 		if (err) throw err;
 		res.send(user);
 	});

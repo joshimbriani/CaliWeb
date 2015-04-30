@@ -9,12 +9,14 @@
 		'$scope',
 		'$rootScope',
 		'$state',
+		'$http',
 		'AuthService',
 		'Session',
-		'Vacation'
+		'Vacation',
+		'User'
 	];
 
-	function HomeController($scope, $rootScope, $state, AuthService, Session, Vacation) {
+	function HomeController($scope, $rootScope, $state, $http, AuthService, Session, Vacation, User) {
 		$scope.publicVacations = [];
 
 		$scope.view = view;
@@ -25,7 +27,18 @@
 		};
 
 		function refresh() {
-			$scope.publicVacations = Vacation.query();
+			$http.get('/api/v1/vacation/').success(function(data, status) {
+		    	$scope.publicVacations = data;
+		    	for (var i = 0; i < $scope.publicVacations.length; i++) {
+		    		$scope.publicVacations[i].users = $scope.publicVacations[i].users.map(function(userId) {
+		    			return User.get({id: userId}, function(data, status) {
+		    				return data;
+		    			});
+		    		})
+		    	}
+		    }).error(function(data, status){
+		    	console.log(data);
+		    });
 		};
 
 		$scope.refresh();

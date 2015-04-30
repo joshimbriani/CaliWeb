@@ -38,5 +38,4 @@ Web Frontend
 ------------
 
 *Authenticate states
-*Incorrect password error message
 

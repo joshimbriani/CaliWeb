@@ -11,10 +11,11 @@
 		'$state',
 		'$cookieStore',
 		'Session',
-		'User'
+		'User',
+		'Register'
 	];
 
-	function AuthService($http, $window, $state, $cookieStore, Session, User) {
+	function AuthService($http, $window, $state, $cookieStore, Session, User, Register) {
 		var authService = {};
  
 	  	authService.login = function (credentials) {
@@ -23,7 +24,7 @@
 		      .then(function (res) {
 		        Session.create(res.data._id);
 		        return res.data;
-		    });
+		    	});
 		};
 
 		authService.logout = function() {
@@ -52,7 +53,7 @@
 	  	};
 
 	  	authService.createUser = function(user) {
-			return User.save(user).$promise;
+			return Register.save(user).$promise;
 		}
 	 
 	  	return authService;

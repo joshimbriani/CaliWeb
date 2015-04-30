@@ -8,7 +8,11 @@
   	user.$inject = ['$resource'];
 
   	function user($resource) {
-		return $resource('/register', {id: '@_id'});
+		return $resource('/api/v1/user/:id', {id: '@_id'}, {
+		  update: {
+		    method: 'PUT'
+		  }
+		});
 	}
 
 })();

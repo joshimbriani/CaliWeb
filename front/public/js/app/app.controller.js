@@ -41,8 +41,15 @@
 		      	password: ''
 		      };
 		      $state.go('home');
-		    }, function () {
-		      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+		    }, function (error) {
+		    	if(error.status == 401) {
+		    		alert('Incorrect email or password. Please try again.');
+			    	$scope.credentials = {
+			    		email: '',
+			    		password: ''
+			    	};
+			    }
+			    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		    })
 		};
 

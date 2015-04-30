@@ -9,10 +9,11 @@
 		'$scope',
 		'$rootScope',
 		'$window',
+		'$state',
 		'AuthService'
 	];
 
-	function signupController($scope, $rootScope, $window, AuthService) {
+	function signupController($scope, $rootScope, $window, $state, AuthService) {
 		$scope.username = '';
 		$scope.email = '';
 		$scope.password = '';
@@ -33,6 +34,7 @@
 				function(res) {
 					if (!res.err) {
 						AuthService.login(user);
+						$state.go('home');
 					}
 					else $scope.message = "Email already in use.";
 				},
