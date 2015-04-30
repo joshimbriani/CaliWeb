@@ -35,10 +35,14 @@
 
 		$scope.vacation = Vacation.get({id: $stateParams.id}, $scope.refresh);
 
-		$interval($scope.refresh, 5000);
+		var intervalPromise = $interval($scope.refresh, 5000);
 
 		$('#captionDetailModal').on('shown.bs.modal', function() {
 	        $('input:text:visible:first').focus();
+	    });
+
+	    $scope.$on('$destroy', function () {
+	    	$interval.cancel(intervalPromise);
 	    });
 
 		$scope.$watch('files', function () {
