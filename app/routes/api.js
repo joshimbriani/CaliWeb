@@ -51,8 +51,7 @@ router.post('/vacationphone', function(req, res) {
 		myVaca.startDate = new Date(req.body.startDate);
 	        myVaca.endDate = new Date(req.body.endDate);
 		myVaca.description = req.body.description;
-		console.log(users);
-		myVaca.pictures = [users[0]._id];
+		myVaca.users = [users[0]._id];
 		myVaca.pictures = [];
 		if(req.body.privacy) {
 			myVaca.private = req.body.privacy;
