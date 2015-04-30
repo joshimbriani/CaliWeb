@@ -77,9 +77,9 @@
 
 			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
 				function(response) {
-					if($scope.pictureLength != response.length) {
+					if($scope.pictureLength != response.data.length) {
 						$scope.pictures = response;
-						$scope.pictureLength = $scope.pictures.length;
+						$scope.pictureLength = $scope.pictures.data.length;
 						$scope.chunkedData = chunk($scope.pictures.data, 3);
 					}
 				}, function(error) {
