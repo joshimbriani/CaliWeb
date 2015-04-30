@@ -172,40 +172,30 @@ router.post('/photo', function(req, res) {
 
 router.post('/photophone', function(req, res) {
 	User.find({}, function(err,users) {
+		console.log(users);
 		Vacation.findOne({users:users[0]._id}).where('startDate').lt(Date.now()).where('endDate').gt(Date.now()).exec(function(err, vaca) {
 			if (err) throw err;
 			if (vaca) {
 				try {
-					new exif({image:req.files.fileupload.path}, function(error, exifData) {
-						if (error) {
-							console.log('Error: ' + error.message);
-						} else {
-							var newPic = new Picture();
-							newPic.path = req.files.fileupload.path;
-							newPic.user = req.users[0]._id;
-							newPic.vacation = vaca;
-							if (exifData.exif.CreateDate != '') {
-								newPic.date = new Date(exifData.exif.CreateDate);
-							} else {
-								newPic.date = Date.now();
-							}
-							newPic.save(function(err, savedPic) {
-								if (err) throw err;
-								vaca.pictures.push(savedPic._id);
-								vaca.save(function(err) {
-									if (err) throw err;
-									res.sendStatus(200);
-								});
+					console.log(req.files.fileupload.path);
+					var newPic = new Picture();
+					newPic.path = req.files.fileupload.path;
+					newPic.user = users[0]._id;
+					newPic.vacation = vaca;
+					newPic.date = Date.now();
+					newPic.save(function(err, savedPic) {
+						if (err) throw err;
+						vaca.pictures.push(savedPic._id);
+						vaca.save(function(err) {
+							if (err) throw err;
+							res.sendStatus(200);
+						});
 								//res.sendStatus(200);
-							});
-						}
 					});
 				} catch (error) {
 					console.log('Error: ' + error.message);
 				}
 				//res.sendStatus(200);
-			} else {	
-				res.sendStatus(403);
 			}
 		});
 	});
