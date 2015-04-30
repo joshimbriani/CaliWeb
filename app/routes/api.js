@@ -5,9 +5,11 @@ var mongoose = require('mongoose');
 var picture = require('../models/picture');
 var vacation = require('../models/vacation');
 var caption = require('../models/caption');
+var user = require('../models/user');
 var Picture = mongoose.model('Picture');
 var Vacation = mongoose.model('Vacation');
 var Caption = mongoose.model('Caption');
+var User = mongoose.model('User');
 
 router.get('/vacation', function(req, res) {
 	Vacation.find({private: false}, function(err, vacations) {
@@ -79,6 +81,13 @@ router.get('/vacation/:vacaid/photo', function(req, res) {
 router.post('/vacation/:vacaid/photo', function(req, res) {
 	res.redirect('/');
 	//Create a new photo
+});
+
+router.get('/user/:userid', function(req, res) {
+	User.getById(req.param.userid, function(err, user) {
+		if (err) throw err;
+		res.send(user);
+	});
 });
 
 router.put('/photo/:photoid', function(req, res) {

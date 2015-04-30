@@ -95,7 +95,6 @@ app.get('/logout', function(req, res) {
 
 app.post('/register', function(req, res) {
 	var newUser = new User();
-	console.log(req.body);
 	newUser.email = req.body.email;
 	newUser.password = req.body.password;
 	newUser.username = req.body.username;
