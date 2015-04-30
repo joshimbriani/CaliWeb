@@ -32,6 +32,7 @@
 		$scope.setTempPicture = setTempPicture;
 		$scope.captionSubmitted = captionSubmitted;
 		$scope.dismissModal = dismissModal;
+		$scope.captionRefresh = captionRefresh;
 
 		$scope.vacation = Vacation.get({id: $stateParams.id}, $scope.refresh);
 
@@ -106,7 +107,23 @@
 
 		function captionSubmitted(editedCaption) {
 			$('#captionDetailModal').modal('hide');
-			Photo.update({id: $scope.tempPicture._id}, {caption: editedCaption}, $scope.refresh);
+			Photo.update({id: $scope.tempPicture._id}, {caption: editedCaption}, $scope.captionRefresh);
+		};
+
+		function captionRefresh() {
+			$scope.tempPicture.caption = "";
+			$scope.tempPicture._id = 0;
+
+			$scope.creator = ($cookieStore.get('userId') == $scope.vacation.users);
+
+			$http.get('/api/v1/vacation/' + $stateParams.id + '/photo').then(
+				function(response) {
+					$scope.pictures = response;
+					$scope.pictureLength = $scope.pictures.data.length;
+					$scope.chunkedData = chunk($scope.pictures.data, 3);
+				}, function(error) {
+					console.log(error);
+				});
 		};
 
 		function dismissModal() {
