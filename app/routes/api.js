@@ -28,7 +28,7 @@ router.post('/vacation', function(req, res) {
 	myVaca.description = req.body.description;
 	myVaca.users = [req.user._id];
 	myVaca.pictures = [];
-	if(req.body.privacy) {
+	if(req.body.privacy == 'true') {
 		myVaca.private = req.body.privacy;
 	}
 	else {
