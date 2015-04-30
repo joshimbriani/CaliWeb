@@ -12,11 +12,12 @@
 		'$stateParams',
 		'$http',
 		'$cookieStore',
+		'$interval',
 		'Vacation',
 		'Photo'
 	];
 
-	function VacationDetailController($scope, $rootScope, $state, $stateParams, $http, $cookieStore, Vacation, Photo) {
+	function VacationDetailController($scope, $rootScope, $state, $stateParams, $http, $cookieStore, $interval, Vacation, Photo) {
 		$scope.pictures = [];
 		$scope.files = [];
 		$scope.chunkedData = [];
@@ -32,6 +33,8 @@
 		$scope.dismissModal = dismissModal;
 
 		$scope.vacation = Vacation.get({id: $stateParams.id}, $scope.refresh);
+
+		$interval($scope.refresh, 1000);
 
 		$('#captionDetailModal').on('shown.bs.modal', function() {
 	        $('input:text:visible:first').focus();
